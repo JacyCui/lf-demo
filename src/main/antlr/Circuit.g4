@@ -9,8 +9,8 @@ item
     ;
 
 exp
-    : num=NUM                           # Literal
-    | var=ID                            # Variable
+    : num=NUM                           # Value
+    | var=ID                            # Var
     | uop '(' exp ')'                   # UnaryExp
     | bop '(' exp ',' exp ')'           # BinaryExp
     | MUX '(' exp ',' exp ',' exp ')'   # MuxExp
