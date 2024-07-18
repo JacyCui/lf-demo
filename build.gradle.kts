@@ -21,7 +21,7 @@ tasks.test {
 }
 
 application {
-    mainClass = "pascal.demo.Main"
+    mainClass = "pascal.lf.Main"
 }
 
 tasks.generateGrammarSource {
