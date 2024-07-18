@@ -3,6 +3,7 @@ package pascal.lf.model;
 import pascal.lf.model.exp.Exp;
 import pascal.lf.model.exp.Var;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -29,7 +30,7 @@ public class Connection {
     }
 
     public Set<Var> getUses() {
-        return lhs.getUses();
+        return rhs.getUses();
     }
 
     public Exp getExp() {
@@ -39,6 +40,18 @@ public class Connection {
     @Override
     public String toString() {
         return "%s <= %s".formatted(lhs, rhs);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Connection that)) return false;
+        return Objects.equals(lhs, that.lhs) && Objects.equals(rhs, that.rhs);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lhs, rhs);
     }
 
 }
