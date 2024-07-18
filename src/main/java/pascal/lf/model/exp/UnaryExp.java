@@ -1,5 +1,6 @@
 package pascal.lf.model.exp;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -48,6 +49,18 @@ public class UnaryExp extends AbstractExp {
     @Override
     public String toString() {
         return "%s(%s)".formatted(operator, operand);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UnaryExp unaryExp)) return false;
+        return operator == unaryExp.operator && Objects.equals(operand, unaryExp.operand);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operator, operand);
     }
 
 }

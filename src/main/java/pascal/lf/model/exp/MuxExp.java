@@ -1,6 +1,7 @@
 package pascal.lf.model.exp;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -36,6 +37,20 @@ public class MuxExp extends AbstractExp {
     @Override
     public String toString() {
         return "mux(%s, %s, %s)".formatted(condition, trueBranch, falseBranch);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof MuxExp muxExp)) return false;
+        return Objects.equals(condition, muxExp.condition) &&
+                Objects.equals(trueBranch, muxExp.trueBranch) &&
+                Objects.equals(falseBranch, muxExp.falseBranch);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(condition, trueBranch, falseBranch);
     }
 
 }

@@ -15,6 +15,8 @@ public class Circuit {
 
     private final Map<Var, Exp> regs;
 
+    private final Set<Connection> resetConnections;
+
     private final Set<Connection> connections;
 
     private final Map<Var, Connection> varToDefiner;
@@ -22,11 +24,12 @@ public class Circuit {
     private final Map<Var, Set<Connection>> varToUsers;
 
     public Circuit() {
-        this.wires = new HashSet<>();
-        this.regs = new HashMap<>();
-        this.connections = new HashSet<>();
-        this.varToDefiner = new HashMap<>();
-        this.varToUsers = new HashMap<>();
+        wires = new HashSet<>();
+        regs = new HashMap<>();
+        resetConnections = new HashSet<>();
+        connections = new HashSet<>();
+        varToDefiner = new HashMap<>();
+        varToUsers = new HashMap<>();
     }
 
     // ---------- Public Query Methods ----------
@@ -60,6 +63,22 @@ public class Circuit {
     }
 
     /**
+     * @return the reset expression of register {@code var},
+     *         {@code null} if {@code var} is not a register
+     */
+    @Nullable
+    public Exp getResetValue(Var var) {
+        return regs.get(var);
+    }
+
+    /**
+     * @return the set of connections representing a reset operation
+     */
+    public Set<Connection> getResetConnections() {
+        return Collections.unmodifiableSet(resetConnections);
+    }
+
+    /**
      * @return all connections in this circuit
      */
     public Set<Connection> getConnections() {
@@ -80,6 +99,16 @@ public class Circuit {
     public Set<Connection> getUsersOf(Var var) {
         return Collections.unmodifiableSet(varToUsers
                 .getOrDefault(var, Collections.emptySet()));
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        wires.forEach(w -> builder.append("wire ").append(w).append("\n"));
+        regs.forEach((r, e) -> builder.append("reg ").append(r)
+                .append(" <- ").append(e).append("\n"));
+        connections.forEach(c -> builder.append(c).append("\n"));
+        return builder.toString();
     }
 
     // ---------- Circuit Building Methods ----------
@@ -103,6 +132,7 @@ public class Circuit {
     public void addReg(Var var, Exp exp) {
         checkFreshness(var);
         regs.put(var, exp);
+        resetConnections.add(Connection.of(var, exp));
     }
 
     /**

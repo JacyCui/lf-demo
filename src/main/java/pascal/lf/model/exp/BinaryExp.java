@@ -1,6 +1,7 @@
 package pascal.lf.model.exp;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -69,6 +70,20 @@ public class BinaryExp extends AbstractExp {
     @Override
     public String toString() {
         return "%s(%s, %s)".formatted(operator, operand1, operand2);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BinaryExp binaryExp)) return false;
+        return operator == binaryExp.operator &&
+                Objects.equals(operand1, binaryExp.operand1) &&
+                Objects.equals(operand2, binaryExp.operand2);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(operator, operand1, operand2);
     }
 
 }
