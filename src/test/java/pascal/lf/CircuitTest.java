@@ -2,9 +2,11 @@ package pascal.lf;
 
 import org.junit.jupiter.api.Test;
 import pascal.lf.frontend.CircuitFrontend;
+import pascal.lf.frontend.ScriptFrontend;
 import pascal.lf.interpreter.Interpreter;
 import pascal.lf.model.Circuit;
 import pascal.lf.model.Connection;
+import pascal.lf.model.Script;
 import pascal.lf.model.exp.Exp;
 import pascal.lf.model.exp.Exps;
 import pascal.lf.model.exp.Var;
@@ -18,14 +20,13 @@ public class CircuitTest {
 
     @Test
     void testCounter() {
-        String design = """
+        Circuit circuit = CircuitFrontend.loadString("""
                 wire en
                 wire out
                 reg counter <- 0
                 counter <= mux(en, add(counter, 1), counter)
                 out <= counter
-                """;
-        Circuit circuit = CircuitFrontend.loadString(design).compile();
+                """).compile();
 
         Var en = Exps.var("en");
         Var out = Exps.var("out");
@@ -66,6 +67,20 @@ public class CircuitTest {
         }
         interpreter.reset();
         assertEquals(Exps.ZERO, interpreter.peek(out));
+
+        Script script = ScriptFrontend.loadString("""
+                reset
+                poke en 1
+                peek out
+                clock
+                peek out
+                clock
+                peek out
+                clock
+                peek out
+                """).compile();
+        interpreter.runScript(script);
+
     }
 
 }
