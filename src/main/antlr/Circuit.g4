@@ -1,6 +1,6 @@
 grammar Circuit;
 
-circ : item* EOF;
+circuit : item* EOF;
 
 item
     : WIRE var=ID            # WireDecl

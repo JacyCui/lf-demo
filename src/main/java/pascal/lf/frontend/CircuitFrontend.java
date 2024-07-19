@@ -55,7 +55,7 @@ public final class CircuitFrontend {
         CircuitLexer lexer = new CircuitLexer(charStream);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         CircuitParser parser = new CircuitParser(tokens);
-        parser.circ().accept(new CircuitBaseVisitor<Void>() {
+        parser.circuit().accept(new CircuitBaseVisitor<Void>() {
 
             @Override
             public Void visitWireDecl(CircuitParser.WireDeclContext ctx) {
