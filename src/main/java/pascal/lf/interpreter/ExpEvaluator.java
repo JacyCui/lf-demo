@@ -2,18 +2,19 @@ package pascal.lf.interpreter;
 
 import pascal.lf.model.exp.*;
 
-import java.util.Collections;
-import java.util.Map;
-
 /**
  * The visitor for expression evaluation.
  */
-class ExpEvaluator implements ExpVisitor<Value> {
+public class ExpEvaluator implements ExpVisitor<Value> {
 
-    private final Map<Var, Value> store;
+    private final Store store;
 
-    public ExpEvaluator(Map<Var, Value> store) {
-        this.store = Collections.unmodifiableMap(store);
+    public static Value evaluate(Exp exp, Store store) {
+        return exp.accept(new ExpEvaluator(store));
+    }
+
+    private ExpEvaluator(Store store) {
+        this.store = store;
     }
 
     @Override

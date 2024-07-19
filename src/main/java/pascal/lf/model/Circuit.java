@@ -11,26 +11,17 @@ import java.util.*;
  */
 public class Circuit {
 
-    private final Set<Var> wires;
+    private final Set<Var> wires = new HashSet<>();
 
-    private final Map<Var, Exp> regs;
+    private final Map<Var, Exp> regs = new HashMap<>();
 
-    private final Set<Connection> resetConnections;
+    private final Set<Connection> resetConnections = new HashSet<>();
 
-    private final Set<Connection> connections;
+    private final Set<Connection> connections = new HashSet<>();
 
-    private final Map<Var, Connection> varToDefiner;
+    private final Map<Var, Connection> varToDefiner = new HashMap<>();
 
-    private final Map<Var, Set<Connection>> varToUsers;
-
-    public Circuit() {
-        wires = new HashSet<>();
-        regs = new HashMap<>();
-        resetConnections = new HashSet<>();
-        connections = new HashSet<>();
-        varToDefiner = new HashMap<>();
-        varToUsers = new HashMap<>();
-    }
+    private final Map<Var, Set<Connection>> varToUsers = new HashMap<>();
 
     // ---------- Public Query Methods ----------
 
