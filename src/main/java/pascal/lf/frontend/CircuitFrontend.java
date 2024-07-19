@@ -10,11 +10,12 @@ import pascal.lf.model.exp.Exps;
 import pascal.lf.parser.CircuitBaseVisitor;
 import pascal.lf.parser.CircuitLexer;
 import pascal.lf.parser.CircuitParser;
+import pascal.lf.util.ShallNotReachHereException;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
-public class CircuitFrontend {
+public final class CircuitFrontend {
 
     private final CharStream charStream;
 

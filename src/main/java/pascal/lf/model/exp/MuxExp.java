@@ -21,6 +21,18 @@ public class MuxExp extends AbstractExp {
         this.falseBranch = falseBranch;
     }
 
+    public Exp getCondition() {
+        return condition;
+    }
+
+    public Exp getTrueBranch() {
+        return trueBranch;
+    }
+
+    public Exp getFalseBranch() {
+        return falseBranch;
+    }
+
     @Override
     protected Set<Var> computeUses() {
         Set<Var> result = new HashSet<>(condition.getUses());

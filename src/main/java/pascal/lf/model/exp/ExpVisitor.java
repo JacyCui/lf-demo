@@ -14,11 +14,11 @@ public interface ExpVisitor<T> {
         return visitDefault(e);
     }
 
-    default T visit(BinaryExp e) {
+    default T visit(UnaryExp e) {
         return visitDefault(e);
     }
 
-    default T visit(UnaryExp e) {
+    default T visit(BinaryExp e) {
         return visitDefault(e);
     }
 

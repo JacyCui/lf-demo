@@ -7,6 +7,10 @@ import java.math.BigInteger;
  */
 public class Exps {
 
+    public static Value ZERO = value(0);
+
+    public static Value ONE = value(1);
+
     public static Value value(String num) {
         return new Value(new BigInteger(num));
     }
