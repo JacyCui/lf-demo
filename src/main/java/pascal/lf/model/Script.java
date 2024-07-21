@@ -21,4 +21,11 @@ public class Script implements Iterable<Command> {
         return commands.iterator();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        commands.forEach(c -> builder.append(c.toString()).append("\n"));
+        return builder.toString();
+    }
+
 }
