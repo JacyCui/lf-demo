@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         if (args.length != 2) {
-            System.err.println("Usage: lf <circuit file> <script file>");
+            System.err.println("Usage: ./lf.sh <circuit file> <script file>");
             return;
         }
         Circuit circuit = CircuitFrontend.loadFileByName(args[0]).compile();

@@ -1,0 +1,5 @@
+wire en
+wire out
+reg counter <- 0
+counter <= mux(en, add(counter, 1), counter)
+out <= counter

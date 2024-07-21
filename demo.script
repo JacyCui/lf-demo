@@ -1,0 +1,9 @@
+reset
+poke en 1
+peek out
+clock
+peek out
+clock
+peek out
+clock
+peek out
